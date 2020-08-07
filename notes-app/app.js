@@ -69,7 +69,7 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: () => console.log('removing note')
+  handler: (argv) => notes.removeNote(argv.title)
 })
 
 // Create list command

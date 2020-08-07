@@ -23,6 +23,20 @@ const addNote = (title, body) => {
   }
 }
 
+const removeNote = (title) => {
+  const notes = loadNotes()
+  const temporalNotes = notes.filter((note) => {
+    return note.title !== title
+  })
+
+  if (notes.length === temporalNotes.length) {
+    console.log(chalk.red('The note with that title does not exist'))
+  } else {
+    saveNotes(temporalNotes)
+    console.log(chalk.green(`The note "${title}" has been removed`))
+  }
+}
+
 const loadNotes = function () {
   try {
     const data = fs.readFileSync(JSONNAME)
@@ -40,5 +54,6 @@ const saveNotes = function (notes) {
 
 module.exports = {
   getNotes: getNotes,
-  addNote: addNote
+  addNote: addNote,
+  removeNote: removeNote
 }
