@@ -1,4 +1,4 @@
-#! nodemon
+#! node
 
 // Chalenge: Use chalk library in your app.js
 //
@@ -9,11 +9,11 @@
 //
 // Bonus: Use does to mess around with other SVGElementInstanceList. Make text boldt and inversed
 
-const chalk = require('chalk')
 const yargs = require('yargs')
 const notes = require('./notes')
 
-/* const validator = require('validator')
+/* const chalk = require('chalk')
+const validator = require('validator')
 
 const emails = ['juan@pepe.com', 'pepe@pepa', 'sarasa@asda.c', 'asdads.com']
 
@@ -55,7 +55,7 @@ yargs.command({
       type: 'string'
     }
   },
-  handler: (argv) => console.log(`adding the note git"${argv.title}" with:\n${argv.body}`)
+  handler: (argv) => notes.addNote(argv.title, argv.body)
 })
 
 // Create remove command
