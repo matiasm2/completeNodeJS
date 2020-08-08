@@ -1,3 +1,4 @@
+'use strict'
 const chalk = require('chalk')
 const fs = require('fs')
 
@@ -19,8 +20,16 @@ const saveNotes = function (notes) {
 }
 
 module.exports = {
-  getNotes() {
-    return 'Your notes...'
+  listNotes() {
+    const notes = loadNotes()
+    if (notes.length === 0){
+      console.error(chalk.red('There are not any notes'));
+    } else {
+      console.log(chalk.bgBlackBright.bold('Listing notes:'))
+      loadNotes().forEach(note => {
+        console.log(chalk.bgBlackBright(`  \u2022 ${note.title}`))
+      })
+    }
   },
   addNote(title, body) {
     const notes = loadNotes()
