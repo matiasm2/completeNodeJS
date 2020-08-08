@@ -3,40 +3,6 @@ const fs = require('fs')
 
 const JSONNAME = 'notes.json'
 
-const getNotes = () => {
-  return 'Your notes...'
-}
-
-const addNote = (title, body) => {
-  const notes = loadNotes()
-  const duplicateNotes = notes.filter((note) => note.title === title)
-
-  if (duplicateNotes.length === 0) {
-    notes.push({
-      title: title,
-      body: body
-    })
-    saveNotes(notes)
-    console.log(chalk.green('A new note has been added'))
-  } else {
-    console.error(chalk.red('Already exist a note with that title'))
-  }
-}
-
-const removeNote = (title) => {
-  const notes = loadNotes()
-  const temporalNotes = notes.filter((note) => {
-    return note.title !== title
-  })
-
-  if (notes.length === temporalNotes.length) {
-    console.log(chalk.red('The note with that title does not exist'))
-  } else {
-    saveNotes(temporalNotes)
-    console.log(chalk.green(`The note "${title}" has been removed`))
-  }
-}
-
 const loadNotes = function () {
   try {
     const data = fs.readFileSync(JSONNAME)
@@ -53,7 +19,33 @@ const saveNotes = function (notes) {
 }
 
 module.exports = {
-  getNotes: getNotes,
-  addNote: addNote,
-  removeNote: removeNote
+  getNotes() {
+    return 'Your notes...'
+  },
+  addNote(title, body) {
+    const notes = loadNotes()
+    const duplicateNotes = notes.filter(note => note.title === title)
+  
+    if (duplicateNotes.length === 0) {
+      notes.push({
+        title: title,
+        body: body
+      })
+      saveNotes(notes)
+      console.log(chalk.green('A new note has been added'))
+    } else {
+      console.error(chalk.red('Already exist a note with that title'))
+    }
+  },
+  removeNote(title) {
+    const notes = loadNotes()
+    const temporalNotes = notes.filter(note => note.title !== title)
+  
+    if (notes.length === temporalNotes.length) {
+      console.error(chalk.red('The note with that title does not exist'))
+    } else {
+      saveNotes(temporalNotes)
+      console.log(chalk.green(`The note "${title}" has been removed`))
+    }
+  }
 }
