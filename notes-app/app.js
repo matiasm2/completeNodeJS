@@ -64,7 +64,7 @@ yargs.command({
     }
   },
   handler(argv) {
-    console.log('reading note')
+    notes.readNOte(argv.title)
   }
 })
 

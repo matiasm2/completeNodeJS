@@ -23,7 +23,7 @@ module.exports = {
   listNotes() {
     const notes = loadNotes()
     if (notes.length === 0){
-      console.error(chalk.red('There are not any notes'));
+      console.error(chalk.red('There are not any notes'))
     } else {
       console.log(chalk.bgBlackBright.bold('Listing notes:'))
       loadNotes().forEach(note => {
@@ -33,9 +33,9 @@ module.exports = {
   },
   addNote(title, body) {
     const notes = loadNotes()
-    const duplicateNotes = notes.filter(note => note.title === title)
+    const duplicateNote = notes.find(note => note.title === title)
   
-    if (duplicateNotes.length === 0) {
+    if (!duplicateNote) {
       notes.push({
         title: title,
         body: body
@@ -44,6 +44,16 @@ module.exports = {
       console.log(chalk.green('A new note has been added'))
     } else {
       console.error(chalk.red('Already exist a note with that title'))
+    }
+  },
+  readNOte(title) {
+    const note = loadNotes().find((note) => note.title === title)
+    
+    if (note){
+      console.log(chalk.bgBlackBright(note.title))
+      console.log(note.body)
+    } else {
+      console.error(chalk.red('Note not found'))
     }
   },
   removeNote(title) {
